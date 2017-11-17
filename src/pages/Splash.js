@@ -11,7 +11,7 @@ export default class Splash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            countDown: 4
+            countDown: 2
         }
         this.key = null;
     }
@@ -23,7 +23,7 @@ export default class Splash extends React.Component {
                 clearInterval(this.key);
                 this.key = null;
                 this.navigate2Main();
-            }else{
+            } else {
                 let countDown = this.state.countDown - 1;
                 this.setState({countDown})
             }

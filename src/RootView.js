@@ -1,26 +1,27 @@
 import React, {Component} from 'react';
-import {StackNavigator, TabNavigator} from 'react-navigation';
+import {connect} from 'react-redux'
+import {StackNavigator, TabNavigator, addNavigationHelpers} from 'react-navigation';
 import Splash from './pages/Splash';
 import Origin from './pages/Origin';
-import Origin1,{wrap} from './pages/Origin1';
+import Origin1, {wrap} from './pages/Origin1';
 
 const Home = TabNavigator(
     {
         index: {
-            screen: wrap(Origin1,{hello:1})
+            screen: wrap(Origin1, {hello: 1})
         },
         index2: {
-            screen: wrap(Origin1,{hello:333})
+            screen: wrap(Origin1, {hello: 333})
         },
         index3: {
-            screen: wrap(Origin1,{hello:3331111})
+            screen: wrap(Origin1, {hello: 3331111})
         }
     },
     {
         lazy: true,
         tabBarPosition: 'bottom',
-        swipeEnabled:true,
-        animationEnabled:true,
+        swipeEnabled: true,
+        animationEnabled: true,
         tabBarOptions: {
             activeTintColor: '#3e9ce9',
             inactiveTintColor: '#999999',
@@ -36,6 +37,7 @@ const Home = TabNavigator(
             }
         },
     });
+
 
 const App = StackNavigator(
     {
@@ -59,4 +61,17 @@ const App = StackNavigator(
         }
     });
 
-export default App;
+
+function AppWithRedux(props) {
+    const {dispatch, nav} = props;
+    const navigation = addNavigationHelpers({
+        dispatch,
+        state: nav
+    })
+
+    return <App navigation={navigation}/>
+}
+
+const mapStateToProps = state => ({ nav: state.nav });
+export default connect(mapStateToProps)(AppWithRedux);
+export {App};

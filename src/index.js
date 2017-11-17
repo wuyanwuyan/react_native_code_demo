@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { Provider ,connect} from 'react-redux';
 import RootView from "./RootView";
 import configureStore from './configureStore';
 
@@ -16,7 +16,7 @@ store.runSaga(helloSaga);
 
 export default Root = () => (
     <Provider store={store}>
-      <RootView />
+      <RootView screenProps={{themeColor:'red'}}/>
     </Provider>
 )
 
