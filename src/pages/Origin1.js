@@ -13,7 +13,7 @@ import Separator from '../components/Separator';
 import ListEmptyComponent from '../components/ListEmptyComponent';
 import ListFooterLoadMore from '../components/ListFooterLoadMore';
 import ListFooterNoMore from '../components/ListFooterNoMore';
-import {fetchGet} from '../utils/fetchUtil';
+import {fetchGetTest} from '../utils/fetchUtil';
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -46,6 +46,7 @@ const wrap = (Component, params) => class Origin2 extends Component {
             tabBarIcon: ({tintColor}) => (
                 <Icon name="home" size={25} color={tintColor}/>
             ),
+            headerLeft: <Icon.Button iconStyle='menu' onPress={() => navigation.navigate('DrawerOpen')} />
         }
     }
 
@@ -88,7 +89,7 @@ export default class Origin1 extends Component {
     }
 
     componentDidMount() {
-        fetchGet('000', fakeGet(0)).then(content => {
+        fetchGetTest('000', fakeGet(0)).then(content => {
             let appendData = content.data || [];
             let data = this.state.data.concat(appendData);
             this.setState({data, offset: 0, hasMore: data.length < content.total});
@@ -97,7 +98,7 @@ export default class Origin1 extends Component {
 
     refresh = () => {
         this.setState({refreshing: true});
-        fetchGet('111', [1, 2, 3]).then(data => {
+        fetchGetTest('111', [1, 2, 3]).then(data => {
             console.log('refreshing  ', data);
             this.setState({refreshing: false});
         })
@@ -106,7 +107,7 @@ export default class Origin1 extends Component {
     loadMore = (info) => {
         if (this.state.data.length === 0 || !this.state.hasMore) return;
         console.log('---- loadMore');
-        fetchGet('000', fakeGet(this.state.offset + limit)).then(content => {
+        fetchGetTest('000', fakeGet(this.state.offset + limit)).then(content => {
             let appendData = content.data || [];
             let data = this.state.data.concat(appendData);
             this.setState({data, offset: this.state.offset + limit, hasMore: data.length < content.total});

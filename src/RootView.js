@@ -1,20 +1,31 @@
 import React, {Component} from 'react';
+import {Text} from 'react-native';
 import {connect} from 'react-redux'
-import {StackNavigator, TabNavigator, addNavigationHelpers} from 'react-navigation';
+import {StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers} from 'react-navigation';
 import Splash from './pages/Splash';
 import Origin from './pages/Origin';
 import Origin1, {wrap} from './pages/Origin1';
+import Home from './pages/home';
+import Content from './pages/content';
+import Mine from './pages/mine';
+import WebViewPage from './pages/WebViewPage';
 
-const Home = TabNavigator(
+import Screen1 from './Containers/Screen1'
+import Screen2 from './Containers/Screen2'
+import Screen3 from './Containers/Screen3'
+import DrawerContainer from './Containers/DrawerContainer'
+
+
+const Tab = TabNavigator(
     {
         index: {
-            screen: wrap(Origin1, {hello: 1})
+            screen: Home
         },
         index2: {
-            screen: wrap(Origin1, {hello: 333})
+            screen: Content
         },
         index3: {
-            screen: wrap(Origin1, {hello: 3331111})
+            screen: Mine
         }
     },
     {
@@ -39,12 +50,22 @@ const Home = TabNavigator(
     });
 
 
-const App = StackNavigator(
+const sreenStack = StackNavigator(
     {
-        Splash: {screen: Splash},
-        Origin: {screen: Origin},
-        Home: {
-            screen: Home
+        Tab: {
+            screen: Tab
+        },
+        screen1: {
+            screen: Screen1
+        },
+        screen2: {
+            screen: Screen2
+        },
+        mine: {
+            screen: Mine
+        },
+        WebViewPage: {
+            screen: WebViewPage
         }
     },
     {
@@ -62,6 +83,28 @@ const App = StackNavigator(
     });
 
 
+const DrawerNav = DrawerNavigator({
+    DrawerNav: {
+        screen: sreenStack
+    }
+}, {
+    drawerWidth: 300,
+    contentComponent: (props) => <DrawerContainer {...props} />
+})
+
+
+const App = StackNavigator(
+    {
+        Splash: {screen: Splash},
+        Home: {
+            screen: DrawerNav
+        }
+    },
+    {
+        headerMode: 'none'
+    });
+
+
 function AppWithRedux(props) {
     const {dispatch, nav} = props;
     const navigation = addNavigationHelpers({
@@ -72,6 +115,6 @@ function AppWithRedux(props) {
     return <App navigation={navigation}/>
 }
 
-const mapStateToProps = state => ({ nav: state.nav });
+const mapStateToProps = state => ({nav: state.nav});
 export default connect(mapStateToProps)(AppWithRedux);
 export {App};
