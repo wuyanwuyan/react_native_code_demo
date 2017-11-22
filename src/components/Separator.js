@@ -21,8 +21,7 @@ let screenWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
     separator:{
         height:1,
-        width:screenWidth - 40,
+        width:screenWidth,
         backgroundColor:'#b5b7ba',
-        marginHorizontal:20
     }
 })

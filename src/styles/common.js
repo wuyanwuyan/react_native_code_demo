@@ -5,6 +5,8 @@ let screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     flex1: {flex: 1},
+    flexDirectionRow: {flexDirection: 'row'},
+    flexDirectionColumn: {flexDirection: 'column'},
     fontSizeNormal: {fontSize: 12},
     separatorFull:{
         width:screenWidth,

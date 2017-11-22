@@ -1,10 +1,10 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import {NavigationActions} from 'react-navigation';
 import createSagaMiddleware from 'redux-saga';
 import {App} from "./RootView";
 
-const initialState = App.router.getStateForAction(App.router.getActionForPathAndParams('Splash'));
-
-const navReducer = (state = initialState, action) => {
+const INITIAL_STATE = App.router.getStateForAction(NavigationActions.init())
+const navReducer = (state = INITIAL_STATE, action) => {
     const newState = App.router.getStateForAction(action, state);
     return newState || state
 }

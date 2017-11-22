@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {BackHandler} from 'react-native';
 import {connect} from 'react-redux'
-import {StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers} from 'react-navigation';
+import {StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions} from 'react-navigation';
 import Splash from './pages/Splash';
 import Origin from './pages/Origin';
 import Origin1, {wrap} from './pages/Origin1';
@@ -9,6 +9,7 @@ import Home from './pages/home';
 import Content from './pages/content';
 import Mine from './pages/mine';
 import WebViewPage from './pages/WebViewPage';
+import ToastUtil from './utils/ToastUtil';
 
 import Screen1 from './Containers/Screen1'
 import Screen2 from './Containers/Screen2'
@@ -49,20 +50,45 @@ const Tab = TabNavigator(
         },
     });
 
-
-const sreenStack = StackNavigator(
+//再包裹一层StackNavigator，是因为我需要StackNavigator的header，https://reactnavigation.org/docs/intro/headers
+const DrawHome = StackNavigator(
     {
-        Tab: {
+        DrawHome: {
             screen: Tab
-        },
-        screen1: {
-            screen: Screen1
-        },
-        screen2: {
-            screen: Screen2
-        },
-        mine: {
-            screen: Mine
+        }
+    },
+    {
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#3e9ce9'
+            },
+            headerTitleStyle: {
+                color: '#fff',
+                fontSize: 20
+            },
+            headerTintColor: '#fff'
+        }
+    }
+);
+
+const DrawerNav = DrawerNavigator({
+    DrawerNav: {
+        screen: DrawHome
+    }
+}, {
+    drawerWidth: 300,
+    contentComponent: (props) => <DrawerContainer {...props} />
+})
+
+
+const App = StackNavigator(
+    {
+        Splash: {screen: Splash},
+        Home: {
+            screen: DrawerNav,
+            navigationOptions: { // 避免StackNavigator添加两个header，这里设置为空
+                header: null,
+            }
         },
         WebViewPage: {
             screen: WebViewPage
@@ -83,36 +109,46 @@ const sreenStack = StackNavigator(
     });
 
 
-const DrawerNav = DrawerNavigator({
-    DrawerNav: {
-        screen: sreenStack
+class AppWithRedux extends Component {
+    constructor(props) {
+        super(...arguments);
+        this.lastBackPressed = null;
     }
-}, {
-    drawerWidth: 300,
-    contentComponent: (props) => <DrawerContainer {...props} />
-})
 
+    // https://github.com/react-community/react-navigation/issues/117
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+    }
 
-const App = StackNavigator(
-    {
-        Splash: {screen: Splash},
-        Home: {
-            screen: DrawerNav
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+    }
+
+    onBackPress = () => {
+        const {dispatch, nav} = this.props;
+        if (nav.index === 0) {
+            if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+                // BackHandler.exitApp();
+                return false;
+            }
+            this.lastBackPressed = Date.now();
+            ToastUtil.showShort('再按一次退出应用');
+            return true;
+        } else {
+            dispatch(NavigationActions.back());
+            return true;
         }
-    },
-    {
-        headerMode: 'none'
-    });
+    };
 
+    render() {
+        const {dispatch, nav} = this.props;
+        const navigation = addNavigationHelpers({
+            dispatch,
+            state: nav
+        })
 
-function AppWithRedux(props) {
-    const {dispatch, nav} = props;
-    const navigation = addNavigationHelpers({
-        dispatch,
-        state: nav
-    })
-
-    return <App navigation={navigation}/>
+        return <App navigation={navigation}/>
+    }
 }
 
 const mapStateToProps = state => ({nav: state.nav});
