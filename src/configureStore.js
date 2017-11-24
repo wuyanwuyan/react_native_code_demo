@@ -22,8 +22,7 @@ export default function configureStore(initialState = {}) {
         middlewares.push(require('redux-immutable-state-invariant').default(), require('redux-logger').logger);
     }
     const storeEnhancers = compose(
-        applyMiddleware(...middlewares),
-        (window && window.devToolsExtension) ? window.devToolsExtension() : f => f,
+        applyMiddleware(...middlewares)
     );
 
 
