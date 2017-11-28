@@ -2,14 +2,14 @@ import React from 'react';
 import {View, Text, FlatList, ActivityIndicator, TouchableOpacity, Image, StyleSheet, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
-import commomStyles from '../../styles/common';
+import cStyles from '../../styles/common';
 import {fetchGet} from '../../utils/fetchUtil';
 
 import Separator from '../../components/Separator';
 import ListEmptyComponent from '../../components/ListEmptyComponent';
 import ListFooterLoadMore from '../../components/ListFooterLoadMore';
 import ListFooterNoMore from '../../components/ListFooterNoMore';
-import LoadingView from '../../components/LoadingView';
+
 // import Swiper from 'react-native-swiper';
 
 export default class ArticleList extends React.Component {
@@ -25,29 +25,25 @@ export default class ArticleList extends React.Component {
     }
 
     componentDidMount() {
-        // getArticles().then(data => {
-        //     let newData = this.state.data.concat(data.contents);
-        //     this.setState({data: newData, total: data.total});
-        // })
-        getTopArticle().then(swiperData => {
-            this.setState({swiperData});
-        })
+        this.props.loadMoreArticle(this.props.categoryId,0);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.articles && nextProps.articles.contents && nextProps.articles.contents.length >= nextProps.articles.total) {
+            this.setState({hasMore: false});
+        }
     }
 
     refresh = () => {
-        this.setState({refreshing: true});
-        getArticles(this.state.data.length).then(data => {
-            this.setState({refreshing: false});
-        })
+        // this.setState({refreshing: true});
+        // getArticles(this.state.data.length).then(data => {
+        //     this.setState({refreshing: false});
+        // })
     }
 
     loadMore = (info) => {
         if (!this.state.hasMore) return;
-        getArticles(this.state.data.length).then(data => {
-            let appendData = data.contents || [];
-            let dataNew = this.state.data.concat(appendData);
-            this.setState({data: dataNew, hasMore: this.state.data.length < data.total});
-        })
+        this.props.loadMoreArticle(this.props.categoryId,this.props.articles.contents.length);
     }
 
     _openWebView = (url, title = '') => () => {
@@ -59,7 +55,7 @@ export default class ArticleList extends React.Component {
             <TouchableOpacity onPress={this._openWebView(`http://www.cqaso.com/zhuanlan/a/${item.id}`)}
                               style={styles.articleContainer}>
                 <Image source={{uri: item.thumbnail}} style={styles.articleImg}/>
-                <View style={commomStyles.flex1}>
+                <View style={cStyles.flex1}>
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.desc} numberOfLines={2}>{item.desc}</Text>
                 </View>
@@ -68,30 +64,14 @@ export default class ArticleList extends React.Component {
     }
 
     render() {
-        const {data, swiperData, hasMore, refreshing} = this.state;
-        let isEmpty = !hasMore && data.length === 0;
+        const {articles} = this.props;
+        const {hasMore, refreshing} = this.state;
+        let isEmpty = !hasMore && articles && articles.contents.length === 0;
+        let flatListData = (articles && articles.contents) || [];
         return (
-            <View style={commomStyles.flex1}>
-                {/*<View style={styles.swiperWrapper}>*/}
-                    {/*{ swiperData.length > 0 ?*/}
-                        {/*<Swiper autoplay={true} paginationStyle={{bottom: 6}} height="100%">*/}
-                            {/*{*/}
-                                {/*swiperData.map((v, i) => {*/}
-                                        {/*return (*/}
-                                            {/*<TouchableOpacity activeOpacity={0.9} style={commomStyles.flex1} key={i}*/}
-                                                              {/*onPress={this._openWebView(`http://www.cqaso.com/zhuanlan/a/${v.articleId}`)}>*/}
-                                                {/*<Image source={{uri: v.thumbnail} } style={commomStyles.flex1}/>*/}
-                                                {/*<Text style={styles.swiperTxt}>{v.title}</Text>*/}
-                                            {/*</TouchableOpacity>*/}
-                                        {/*)*/}
-                                    {/*}*/}
-                                {/*)*/}
-                            {/*}*/}
-                        {/*</Swiper> : <LoadingView/>}*/}
-                {/*</View>*/}
-                <Separator/>
+            <View style={cStyles.flex1}>
                 <FlatList
-                    data={data}
+                    data={flatListData}
                     renderItem={this._renderItem}
                     keyExtractor={(item, index) => index}
                     ItemSeparatorComponent={Separator}
@@ -181,14 +161,38 @@ const styles = StyleSheet.create({
 
 })
 
-//state 全部：-1 草稿：0 已发布：1
-function getArticles(offset = 0, limit = 10) {
-    var query = {state: 1, offset, limit};
-    return fetchGet("/column/articles", query);
-}
 
-// 获取前三篇文章，用于滚动显示
-function getTopArticle() {
-    return fetchGet("/column/mainPage/imageInfo");
+{/*<View style={styles.swiperWrapper}>*/
 }
-
+{/*{ swiperData.length > 0 ?*/
+}
+{/*<Swiper autoplay={true} paginationStyle={{bottom: 6}} height="100%">*/
+}
+{/*{*/
+}
+{/*swiperData.map((v, i) => {*/
+}
+{/*return (*/
+}
+{/*<TouchableOpacity activeOpacity={0.9} style={commomStyles.flex1} key={i}*/
+}
+{/*onPress={this._openWebView(`http://www.cqaso.com/zhuanlan/a/${v.articleId}`)}>*/
+}
+{/*<Image source={{uri: v.thumbnail} } style={commomStyles.flex1}/>*/
+}
+{/*<Text style={styles.swiperTxt}>{v.title}</Text>*/
+}
+{/*</TouchableOpacity>*/
+}
+{/*)*/
+}
+{/*}*/
+}
+{/*)*/
+}
+{/*}*/
+}
+{/*</Swiper> : <LoadingView/>}*/
+}
+{/*</View>*/
+}

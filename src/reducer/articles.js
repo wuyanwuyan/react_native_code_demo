@@ -1,0 +1,43 @@
+import * as types from '../actionTypes/index';
+
+const initialState = {
+    loading: false,
+    cateList: [],
+    articleList: {},
+    categoryId: null
+};
+
+export default function articles(state = initialState, action) {
+    switch (action.type) {
+        case types.first_load_start:
+            return state;
+        case types.first_load_success:
+            return {
+                ...state,
+                cateList: action.cateList,
+            };
+        case types.fetch_Article_start:
+            return {
+                ...state,
+                loading: true
+            }
+        case types.fetch_Article_success:
+            let old = state.articleList[action.categoryId] || {};
+            let newOne = {
+                ...action.data,
+                contents: (old.contents || []).concat(action.data.contents)
+            };
+
+            return {
+                ...state,
+                articleList: {
+                    ...state.articleList,
+                    [action.categoryId]: newOne,
+                },
+                loading: false
+            }
+        default:
+            return state;
+
+    }
+}

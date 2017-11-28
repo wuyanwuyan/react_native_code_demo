@@ -1,9 +1,6 @@
-import { all, fork } from 'redux-saga/effects';
-import {firstLoad} from './article';
-export function* helloSaga() {
-    console.log('Hello Sagas!')
-}
+import {all, fork} from 'redux-saga/effects';
+import {firstLoad, fetchArticle} from './article';
 
 export default function* rootSaga() {
-    yield all([firstLoad()]);
+    yield all([firstLoad(), fetchArticle()]);
 }

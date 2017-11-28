@@ -9,10 +9,10 @@ import { Provider ,connect} from 'react-redux';
 import RootView from "./RootView";
 import configureStore from './configureStore';
 
-import {helloSaga} from './sagas';
+import rootSaga from './sagas';
 
 let store = configureStore({});
-store.runSaga(helloSaga);
+store.runSaga(rootSaga);
 
 export default Root = () => (
     <Provider store={store}>

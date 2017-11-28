@@ -1,9 +1,13 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
+import cStyles from '../../styles/common';
 import ArticleList from './ArticleList';
+import {firstLoad,loadMoreArticle} from '../../actions/articles';
+import LoadingView from '../../components/LoadingView';
 
 class Home extends React.Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -23,31 +27,46 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-
+        this.props.firstLoad();
     }
 
     render() {
+        const {articles: {cateList, articleList}} = this.props;
+
+        if (cateList.length === 0) return <LoadingView/>;
         return (
-            <ScrollableTabView>
-                <ArticleList tabLabel="React"/>
-                <ArticleList tabLabel="Flow"/>
-                <ArticleList tabLabel="Jest"/>
+            <ScrollableTabView
+                tabBarBackgroundColor="#fcfcfc"
+                tabBarActiveTextColor="#3e9ce9"
+                tabBarInactiveTextColor="#aaaaaa">
+                {
+                    cateList.map(v =>
+                        <ArticleList
+                            navigation={this.props.navigation}
+                            tabLabel={v.type}
+                            key={v.id}
+                            categoryId={v.id}
+                            articles={articleList[v.id]}
+                            loadMoreArticle={this.props.loadMoreArticle}
+                        />
+                    )
+                }
             </ScrollableTabView>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    const { categorys } = state;
+    const {articles} = state;
     return {
-        categorys
+        articles
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    const readActions = bindActionCreators(readCreators, dispatch);
     return {
-        readActions
+        firstLoad: bindActionCreators(firstLoad, dispatch),
+        loadMoreArticle:bindActionCreators(loadMoreArticle,dispatch)
     };
 };
 
