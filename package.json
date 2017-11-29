@@ -5,9 +5,11 @@
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"react-devtools": "react-devtools",
+		"React-native_bundle":"React-native bundle --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.jsbundle --platform android --assets-dest ./android/app/src/main/res/ --dev false",
 		"test": "jest"
 	},
 	"dependencies": {
+		"es6-symbol": "^3.1.1",
 		"moment": "^2.19.2",
 		"react": "16.0.0",
 		"react-native": "0.50.3",

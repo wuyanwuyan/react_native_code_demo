@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+import 'es6-symbol/implement';
 import React, { Component } from 'react';
 import { Provider ,connect} from 'react-redux';
 import RootView from "./RootView";

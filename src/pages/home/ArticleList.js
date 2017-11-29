@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, FlatList, ActivityIndicator, TouchableOpacity, Image, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, FlatList, Platform, TouchableOpacity,TouchableNativeFeedback, Image, StyleSheet, Dimensions} from 'react-native';
 import cStyles from '../../styles/common';
 
 import Separator from '../../components/Separator';
@@ -8,6 +8,11 @@ import ListFooterLoadMore from '../../components/ListFooterLoadMore';
 import ListFooterNoMore from '../../components/ListFooterNoMore';
 
 // import Swiper from 'react-native-swiper';
+
+let TouchableItemContainer = Platform.select({
+    ios:TouchableOpacity,
+    android:TouchableNativeFeedback
+})
 
 export default class ArticleList extends React.Component {
     constructor(props) {
@@ -49,14 +54,15 @@ export default class ArticleList extends React.Component {
 
     _renderItem = ({item, index}) => {
         return (
-            <TouchableOpacity onPress={this._openWebView(`http://www.cqaso.com/zhuanlan/a/${item.id}`)}
-                              style={styles.articleContainer}>
-                <Image source={{uri: item.thumbnail}} style={styles.articleImg}/>
-                <View style={cStyles.flex1}>
-                    <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.desc} numberOfLines={2}>{item.desc}</Text>
+            <TouchableItemContainer onPress={this._openWebView(`http://www.cqaso.com/zhuanlan/a/${item.id}`)}>
+                <View style={styles.articleContainer}>
+                    <Image source={{uri: item.thumbnail}} style={styles.articleImg}/>
+                    <View style={cStyles.flex1}>
+                        <Text style={styles.title}>{item.title}</Text>
+                        <Text style={styles.desc} numberOfLines={2}>{item.desc}</Text>
+                    </View>
                 </View>
-            </TouchableOpacity>
+            </TouchableItemContainer>
         )
     }
 

@@ -18,18 +18,18 @@ import LoadingView from '../components/LoadingView';
 
 // 单页面网页可能出现title改变
 let injectedJavaScript = `
-    window.postMessage(document.title)
+        window.postMessage(document.title,"*")
 `;
 
 export default class WebViewPage extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
             title: navigation.state.params.title,
-            headerBackTitle:null,
-            headerBackTitleStyle:{
-                color:'#3e9ce9'
+            headerBackTitle: null,
+            headerBackTitleStyle: {
+                color: '#3e9ce9'
             },
-            headerRight:(
+            headerRight: (
                 <Icon.Button
                     name="share"
                     backgroundColor="transparent"
@@ -51,14 +51,14 @@ export default class WebViewPage extends React.Component {
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.backHandler);
-        this.props.navigation.setParams({handleShare:this.handleShare});
+        this.props.navigation.setParams({handleShare: this.handleShare});
     }
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.backHandler);
     }
 
-    handleShare = () =>{
+    handleShare = () => {
         console.log('share !');
     }
 
@@ -71,13 +71,13 @@ export default class WebViewPage extends React.Component {
     }
 
     onNavigationStateChange = (navState) => {
-        console.log('+++++  ',navState);
+        console.log('+++++  ', navState);
         this.canGoBack = navState.canGoBack;
     };
 
-    handleMessage = (message,title) =>{
-        console.log('title dubu-- ',title,message.nativeEvent,'----====kkkkk')
-        this.props.navigation.setParams({title:message.nativeEvent.data})
+    handleMessage = (message, title) => {
+        console.log('title dubu-- ', title, message.nativeEvent, '----====kkkkk')
+        this.props.navigation.setParams({title: message.nativeEvent.data})
     }
 
     render() {
