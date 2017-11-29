@@ -11,7 +11,7 @@ export function fetchGetTest(url, query) {
 
 
 export function fetchGet(url, query={}, option = {}) {
-    __DEV__ && console.log('fetch ',url);
+    __DEV__ && console.log('%c start:  ' + url, 'color: green');
     let isOk;
     let serializeQuery = serialize(query);
     let finalUrl = `${server.backend}${url}` + (serializeQuery?`?${serializeQuery}`:'');
