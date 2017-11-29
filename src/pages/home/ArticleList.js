@@ -1,9 +1,6 @@
 import React from 'react';
 import {View, Text, FlatList, ActivityIndicator, TouchableOpacity, Image, StyleSheet, Dimensions} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
 import cStyles from '../../styles/common';
-import {fetchGet} from '../../utils/fetchUtil';
 
 import Separator from '../../components/Separator';
 import ListEmptyComponent from '../../components/ListEmptyComponent';

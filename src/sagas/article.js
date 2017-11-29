@@ -25,18 +25,9 @@ export function *fetchArticle() {
     });
 }
 
-
 function getArticles(categoryId, offset = 0, limit = 10) {
     var query = {categoryId, state: 1, offset, limit};
-
-    return new Promise((rs, rj) => {
-        setTimeout(() => {
-            rs(null)
-        }, 3000)
-    }).then(() => {
     return fetchGet("/column/articles", query);
-    })
-
 }
 
 // 获取前三篇文章，用于滚动显示
