@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "react-native-code-push": "^5.2.0-beta"
+  }
+}

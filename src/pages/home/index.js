@@ -6,8 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view';
 import cStyles from '../../styles/common';
 import ArticleList from './ArticleList';
-import {firstLoad,loadMoreArticle} from '../../actions/articles';
+import {firstLoad, loadMoreArticle} from '../../actions/articles';
 import LoadingView from '../../components/LoadingView';
+import codePush from 'react-native-code-push';
 
 class Home extends React.Component {
     static navigationOptions = ({navigation, screenProps}) => {
@@ -28,6 +29,17 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.props.firstLoad();
+        codePush.sync({
+            updateDialog: {
+                appendReleaseDescription: true,
+                descriptionPrefix: '\n\n更新内容：\n',
+                title: '更新',
+                mandatoryUpdateMessage: '',
+                mandatoryContinueButtonLabel: '更新',
+            },
+            mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
+            deploymentKey: "vn1L8Hn4AIVLmbImJOxyUafkKFAaf09d6585-c32c-4359-8b28-0c1d7984bedb",
+        });
     }
 
     render() {
@@ -66,7 +78,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         firstLoad: bindActionCreators(firstLoad, dispatch),
-        loadMoreArticle:bindActionCreators(loadMoreArticle,dispatch)
+        loadMoreArticle: bindActionCreators(loadMoreArticle, dispatch)
     };
 };
 

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">react_native_code_demo</string>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey"></string>
+    <string name="app_name">闯奇新闻</string>
 </resources>

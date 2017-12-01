@@ -14,7 +14,6 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ToastUtil from '../utils/ToastUtil';
-import LoadingView from '../components/LoadingView';
 
 // 单页面网页可能出现title改变
 let injectedJavaScript = `
@@ -71,12 +70,12 @@ export default class WebViewPage extends React.Component {
     }
 
     onNavigationStateChange = (navState) => {
-        console.log('+++++  ', navState);
+        console.log('onNavigationStateChange  ', navState);
         this.canGoBack = navState.canGoBack;
     };
 
-    handleMessage = (message, title) => {
-        console.log('title dubu-- ', title, message.nativeEvent, '----====kkkkk')
+    onMessage = (message, title) => {
+        console.log('onMessage  ', title, message.nativeEvent)
         this.props.navigation.setParams({title: message.nativeEvent.data})
     }
 
@@ -95,7 +94,7 @@ export default class WebViewPage extends React.Component {
                 onShouldStartLoadWithRequest={() => true}
                 onNavigationStateChange={this.onNavigationStateChange}
                 injectedJavaScript={injectedJavaScript}
-                onMessage={this.handleMessage}
+                onMessage={this.onMessage}
             />
         );
     }

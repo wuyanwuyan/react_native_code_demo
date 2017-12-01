@@ -1,36 +1,39 @@
 {
-	"name": "react_native_code_demo",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"react-devtools": "react-devtools",
-		"React-native_bundle":"React-native bundle --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.jsbundle --platform android --assets-dest ./android/app/src/main/res/ --dev false",
-		"test": "jest"
-	},
-	"dependencies": {
-		"es6-symbol": "^3.1.1",
-		"moment": "^2.19.2",
-		"react": "16.0.0",
-		"react-native": "0.50.3",
-		"react-native-scrollable-tab-view": "^0.8.0",
-		"react-native-swiper": "^1.5.13",
-		"react-native-vector-icons": "^4.4.2",
-		"react-navigation": "^1.0.0-beta.19",
-		"react-redux": "^5.0.6",
-		"redux": "^3.7.2",
-		"redux-saga": "^0.16.0"
-	},
-	"devDependencies": {
-		"babel-jest": "21.2.0",
-		"babel-preset-react-native": "4.0.0",
-		"jest": "21.2.1",
-		"react-test-renderer": "16.0.0",
-		"redux-immutable-state-invariant": "^2.1.0",
-		"redux-logger": "^3.0.6",
-		"remote-redux-devtools": "^0.5.12"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "react_native_code_demo",
+  "version": "1.0.0",
+  "description": "react_native_code_demo",
+  "repository": "git@github.com:wuyanwuyan/react_native_code_demo.git",
+  "author": "claude <xxs1992@foxmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "react-devtools": "react-devtools",
+    "test": "jest"
+  },
+  "dependencies": {
+    "es6-symbol": "^3.1.1",
+    "moment": "^2.19.2",
+    "react": "16.0.0",
+    "react-native": "0.50.3",
+    "react-native-code-push": "^5.2.0-beta",
+    "react-native-scrollable-tab-view": "^0.8.0",
+    "react-native-swiper": "^1.5.13",
+    "react-native-vector-icons": "^4.4.2",
+    "react-navigation": "^1.0.0-beta.19",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-test-renderer": "16.0.0",
+    "redux-immutable-state-invariant": "^2.1.0",
+    "redux-logger": "^3.0.6",
+    "remote-redux-devtools": "^0.5.12"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }
