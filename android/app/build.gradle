@@ -125,6 +125,9 @@ android {
         }
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "CODEPUSH_KEY", '""'
+        }
         releaseStaging {
             buildConfigField "String", "CODEPUSH_KEY", '"4GKGaBAl5rocSNvE2r8jULmBMRvkf09d6585-c32c-4359-8b28-0c1d7984bedb"'
         }
