@@ -8,7 +8,7 @@ import Origin1, {wrap} from './pages/Origin1';
 import Home from './pages/home';
 import Content from './pages/content';
 import Mine from './pages/mine';
-import WebViewPage from './pages/webView';
+import WebViewPage from './pages/webView/index';
 import ToastUtil from './utils/ToastUtil';
 
 import Screen1 from './Containers/Screen1'
@@ -40,6 +40,10 @@ const Tab = TabNavigator(
             showIcon: true,
             style: {
                 backgroundColor: '#fff'
+            },
+            labelStyle:{
+                marginTop:0,
+                marginBottom:2
             },
             indicatorStyle: {
                 opacity: 0

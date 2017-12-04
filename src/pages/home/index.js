@@ -84,7 +84,7 @@ class Home extends React.Component {
         const {modalOpen, showDownloading, showInstalling, downloadProgress} = this.state;
         return (
             <View style={cStyles.flex1}>
-                <Modal isVisible={modalOpen} animationInTiming={0}>
+                <Modal isVisible={modalOpen} animationInTiming={100}>
                     <View style={styles.modalContent}>
                         <Text style={{textAlign: 'center'}}>{showInstalling ? '安装中' : '下载中'}</Text>
                         {showInstalling ? null : <ProgressBar width="100%" progress={downloadProgress} color="blue"/>}

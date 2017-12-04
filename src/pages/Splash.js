@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, Button, StyleSheet, Dimensions, Text, TouchableOpacity} from 'react-native';
 import NavigationUtil from '../utils/NavigationUtil';
-import commomStyles from '../styles/common';
+import cStyles from '../styles/common';
 
 export default class Splash extends React.Component {
     static navigationOptions = {
@@ -43,13 +43,13 @@ export default class Splash extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Image source={require('../assets/splash.png')} style={styles.img}/>
+            <View style={[cStyles.flex1,{backgroundColor:'#002035'}]}>
+                <Image source={require('../assets/logo.jpg')} style={styles.img}/>
                 <TouchableOpacity style={styles.pass} onPress={this.navigate2Main}>
-                    <Text style={commomStyles.fontSizeNormal}>{`跳过(${this.state.countDown}s)`}</Text>
+                    <Text style={cStyles.fontSizeNormal}>{`跳过(${this.state.countDown}s)`}</Text>
                 </TouchableOpacity>
-                <View>
-                    <Button onPress={this.navigate2Main} title='进入' color="#000"/>
+                <View style={[cStyles.flex1,styles.descTextContainer]}>
+                    <Text style={styles.descText}>Copyright©2013-2017闯奇信息科技（上海）有限公司</Text>
                 </View>
             </View>
         )
@@ -58,27 +58,27 @@ export default class Splash extends React.Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    imgContainer: {
-        width: 375,
-        height: 300,
-        position: 'relative'
-    },
     img: {
-        width: '100%',
+        maxWidth: '100%',
         maxHeight: '90%',
-        resizeMode: 'cover',
+        resizeMode: 'contain',
     },
     pass: {
         position: 'absolute',
         top: 20,
         right: 10,
-        backgroundColor: '#ffffff55',
+        backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 4,
         padding: 6
     },
-    enterBtn: {}
+    descTextContainer:{
+        justifyContent:'flex-end',
+        alignItems:'center'
+    },
+    descText:{
+        paddingBottom:30,
+        fontSize:12,
+        color:'white',
+    }
 
 });

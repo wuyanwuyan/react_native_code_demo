@@ -30,14 +30,14 @@ export default class WebViewModal extends React.Component {
                 <View style={styles.modalContent}>
                     <View style={styles.itemsContainer}>
                         <View style={styles.itemContainer}>
-                            <TouchableOpacity style={styles.iconContainer} activeOpacity={0.8}
+                            <TouchableOpacity style={styles.iconContainer}
                                               onPress={()=>{}}>
                                 <Icon name="wechat" size={30} color="green"/>
                             </TouchableOpacity>
                             <Text style={styles.iconText}>分享到微信</Text>
                         </View>
                         <View style={styles.itemContainer}>
-                            <TouchableOpacity style={styles.iconContainer} activeOpacity={0.8}
+                            <TouchableOpacity style={styles.iconContainer}
                                               onPress={this.writeToClipboard}>
                                 <Icon name="content-copy" size={30} color="#000000"/>
                             </TouchableOpacity>

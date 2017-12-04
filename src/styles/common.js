@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
         width:screenWidth,
         height:1,
         backgroundColor:'#b5b7ba',
+    },
+    center:{
+        alignItems:'center',
+        justifyContent:'center',
     }
 })
 

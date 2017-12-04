@@ -88,10 +88,11 @@ export default class WebViewPage extends React.Component {
         const {params} = this.props.navigation.state;
         const {modalOpen} = this.state;
         return (
-            <View>
+            <View style={{flex: 1}}>
                 <WebViewModal
                     isVisible={modalOpen}
                     onBackdropPress={this.backHandler}
+                    onBackButtonPress={this.backHandler}
                     url={params.url}
                 />
                 <WebView

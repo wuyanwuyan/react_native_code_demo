@@ -82,7 +82,7 @@ export default class ArticleList extends React.Component {
                     refreshing={refreshing}
                     onRefresh={this.refresh}
                     onEndReached={this.loadMore}
-                    onEndReachedThreshold={0}
+                    onEndReachedThreshold={0.0001}  // 有坑，这个数值
                     ListFooterComponent={(hasMore) ? ListFooterLoadMore : ListFooterNoMore}
                 />
             </View>
@@ -175,11 +175,11 @@ const styles = StyleSheet.create({
 }
 {/*return (*/
 }
-{/*<TouchableOpacity activeOpacity={0.9} style={commomStyles.flex1} key={i}*/
+{/*<TouchableOpacity activeOpacity={0.9} style={cStyles.flex1} key={i}*/
 }
 {/*onPress={this._openWebView(`http://www.cqaso.com/zhuanlan/a/${v.articleId}`)}>*/
 }
-{/*<Image source={{uri: v.thumbnail} } style={commomStyles.flex1}/>*/
+{/*<Image source={{uri: v.thumbnail} } style={cStyles.flex1}/>*/
 }
 {/*<Text style={styles.swiperTxt}>{v.title}</Text>*/
 }
