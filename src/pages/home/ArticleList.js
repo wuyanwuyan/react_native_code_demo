@@ -136,8 +136,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: '#9A9898'
     },
-
-    wrapper: {},
     slide1: {
         flex: 1,
         justifyContent: 'center',

@@ -8,7 +8,7 @@ import Origin1, {wrap} from './pages/Origin1';
 import Home from './pages/home';
 import Content from './pages/content';
 import Mine from './pages/mine';
-import WebViewPage from './pages/WebViewPage';
+import WebViewPage from './pages/webView';
 import ToastUtil from './utils/ToastUtil';
 
 import Screen1 from './Containers/Screen1'
