@@ -19,6 +19,7 @@ class CandleStickChartScreen extends React.Component {
             }
         }
     };
+
     constructor() {
         super(...arguments);
 
@@ -150,9 +151,9 @@ class CandleStickChartScreen extends React.Component {
     handleSelect(event) {
         let entry = event.nativeEvent
         if (entry == null) {
-            this.setState({...this.state, selectedEntry: null})
+            this.setState({selectedEntry: null})
         } else {
-            this.setState({...this.state, selectedEntry: JSON.stringify(entry)})
+            this.setState({selectedEntry: JSON.stringify(entry)})
         }
     }
 
@@ -190,7 +191,7 @@ class CandleStickChartScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height:200,
         backgroundColor: '#F5FCFF'
     },
     chart: {
