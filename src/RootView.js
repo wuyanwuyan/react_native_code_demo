@@ -11,11 +11,8 @@ import Mine from './pages/mine';
 import WebViewPage from './pages/webView/index';
 import ToastUtil from './utils/ToastUtil';
 
-import Screen1 from './Containers/Screen1'
-import Screen2 from './Containers/Screen2'
-import Screen3 from './Containers/Screen3'
 import DrawerContainer from './Containers/DrawerContainer'
-
+import CandleStickChartScreen from './components/CandleStickChartScreen';
 
 const Tab = TabNavigator(
     {
@@ -96,6 +93,9 @@ const App = StackNavigator(
         },
         WebViewPage: {
             screen: WebViewPage
+        },
+        CandleStickChartScreen:{
+            screen:CandleStickChartScreen
         }
     },
     {

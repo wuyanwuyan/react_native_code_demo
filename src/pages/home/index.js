@@ -94,6 +94,7 @@ class Home extends React.Component {
                 {
                     cateList.length === 0 ? <LoadingView/> :
                         <ScrollableTabView
+                            renderTabBar={()=><ScrollableTabBar/>}
                             tabBarBackgroundColor="#fcfcfc"
                             tabBarActiveTextColor="#3e9ce9"
                             tabBarInactiveTextColor="#aaaaaa">

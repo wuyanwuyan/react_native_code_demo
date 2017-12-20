@@ -49,7 +49,8 @@ export default class ArticleList extends React.Component {
     }
 
     _openWebView = (url, title = '') => () => {
-        this.props.navigation.navigate('WebViewPage', {url, title})
+        // this.props.navigation.navigate('WebViewPage', {url, title});
+        this.props.navigation.navigate('CandleStickChartScreen', {url, title});
     }
 
     _renderItem = ({item, index}) => {

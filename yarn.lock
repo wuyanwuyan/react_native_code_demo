@@ -3656,6 +3656,12 @@ react-native-animatable@^1.2.3:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-charts-wrapper@^0.3.1:
+  version "0.3.1"
+  resolved "http://registry.npm.taobao.org/react-native-charts-wrapper/download/react-native-charts-wrapper-0.3.1.tgz#1205b75456cfa10b7db8e46f9509146f19663cce"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-code-push@^5.2.0-beta:
   version "5.2.0-beta"
   resolved "http://registry.npm.taobao.org/react-native-code-push/download/react-native-code-push-5.2.0-beta.tgz#ba27e6f4ad33b9ee8270ff6f7648d6d97d88649c"
