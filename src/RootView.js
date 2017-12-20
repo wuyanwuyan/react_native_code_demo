@@ -13,6 +13,7 @@ import ToastUtil from './utils/ToastUtil';
 
 import DrawerContainer from './Containers/DrawerContainer'
 import CandleStickChartScreen from './components/CandleStickChartScreen';
+import RNExitApp from 'react-native-exit-app';
 
 const Tab = TabNavigator(
     {
@@ -133,6 +134,7 @@ class AppWithRedux extends Component {
         if (nav.index === 0) {
             if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
                 // BackHandler.exitApp();
+                RNExitApp.exitApp();
                 return false;
             }
             this.lastBackPressed = Date.now();

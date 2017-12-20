@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 
 import {CandleStickChart} from 'react-native-charts-wrapper';
+import Orientation from 'react-native-orientation';
 
 class CandleStickChartScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
+            header:null,
             title: 'K线',
             headerBackTitle: null,
             headerBackTitleStyle: {
@@ -108,6 +110,8 @@ class CandleStickChartScreen extends React.Component {
     }
 
     componentDidMount() {
+        Orientation.lockToLandscape();
+
         let limitLines = [];
         for (var i = 0; i < this.state.data.dataSets[0].values.length / 5; i++) {
             limitLines.push({
@@ -116,8 +120,7 @@ class CandleStickChartScreen extends React.Component {
                 lineWidth: 1,
                 label: (i + 1).toString()
             });
-        }
-        ;
+        };
         let newState = {
             ...this.state,
             ...{
@@ -146,6 +149,10 @@ class CandleStickChartScreen extends React.Component {
             }
         };
         this.setState(newState);
+    }
+
+    componentWillUnmount(){
+        Orientation.unlockAllOrientations();
     }
 
     handleSelect(event) {

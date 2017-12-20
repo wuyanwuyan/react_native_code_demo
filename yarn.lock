@@ -3689,12 +3689,20 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-exit-app@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/react-native-exit-app/download/react-native-exit-app-1.0.0.tgz#a2fbb121d902e6967cd8a365fe8453e5c4bc3172"
+
 react-native-modal@^4.1.1:
   version "4.1.1"
   resolved "http://registry.npm.taobao.org/react-native-modal/download/react-native-modal-4.1.1.tgz#4c1055dc045106542a8e3bb3fd656a6d3bc319d9"
   dependencies:
     prop-types "15.5.10"
     react-native-animatable "^1.2.3"
+
+react-native-orientation@^3.1.0:
+  version "3.1.0"
+  resolved "http://registry.npm.taobao.org/react-native-orientation/download/react-native-orientation-3.1.0.tgz#ce470fe44a9a47df5be4995b01a1089d3f4a033e"
 
 react-native-scrollable-tab-view@^0.8.0:
   version "0.8.0"

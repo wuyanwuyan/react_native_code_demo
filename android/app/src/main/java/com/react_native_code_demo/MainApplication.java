@@ -3,6 +3,8 @@ package com.react_native_code_demo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.wumke.RNExitApp.RNExitAppPackage;
+import com.github.yamill.orientation.OrientationPackage;
 import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -32,6 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNExitAppPackage(),
+            new OrientationPackage(),
             new MPAndroidChartPackage(),
 //           new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
             new VectorIconsPackage(),
