@@ -20,7 +20,7 @@ export default class Content extends React.Component {
     render() {
         return (
             <View>
-                <Text>内容random999</Text>
+                <Text>测试版本1.00000</Text>
             </View>
         )
     }
