@@ -1,4 +1,4 @@
 export default {
-    backend: __DEV__ ? 'http://121.40.106.106:8080' :
+    backend: __DEV__ ? 'http://backend.cqaso.com' :
         'http://backend.cqaso.com',
 }

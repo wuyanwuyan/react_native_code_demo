@@ -1,18 +1,11 @@
-import React from 'react';
-import {
-    StyleSheet,
-    WebView,
-    BackHandler,
-    Dimensions,
-    Text,
-    TouchableOpacity,
-    View,
-    Clipboard, Alert
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Modal from 'react-native-modal';
+import React from "react";
+import {Clipboard, StyleSheet, Text, TouchableHighlight, View,Share} from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Modal from "react-native-modal";
+import ToastUtil from "../../utils/ToastUtil";
 
-
+const underlayColor = '#F4F4F4'
 export default class WebViewModal extends React.Component {
     constructor(props) {
         super(props);
@@ -21,8 +14,17 @@ export default class WebViewModal extends React.Component {
 
     writeToClipboard = async () => {
         await Clipboard.setString(this.props.url);
-        __DEV__ && Alert.alert(await Clipboard.getString());
+        ToastUtil.showShort('已复制到剪切板');
     };
+
+    moreOperation = () => {
+        Share.share({
+            message: `分享一篇文章：${this.props.url}`,
+            url: this.props.url,
+            title: this.props.title,
+        }).catch((error) => {
+            console.log(error)
+        });    }
 
     render() {
         return (
@@ -30,18 +32,26 @@ export default class WebViewModal extends React.Component {
                 <View style={styles.modalContent}>
                     <View style={styles.itemsContainer}>
                         <View style={styles.itemContainer}>
-                            <TouchableOpacity style={styles.iconContainer}
-                                              onPress={()=>{}}>
+                            <TouchableHighlight style={styles.iconContainer}
+                                                onPress={() => {
+                                                }} underlayColor={underlayColor}>
                                 <Icon name="wechat" size={30} color="green"/>
-                            </TouchableOpacity>
+                            </TouchableHighlight>
                             <Text style={styles.iconText}>分享到微信</Text>
                         </View>
                         <View style={styles.itemContainer}>
-                            <TouchableOpacity style={styles.iconContainer}
-                                              onPress={this.writeToClipboard}>
+                            <TouchableHighlight style={styles.iconContainer}
+                                                onPress={this.writeToClipboard} underlayColor={underlayColor}>
                                 <Icon name="content-copy" size={30} color="#000000"/>
-                            </TouchableOpacity>
+                            </TouchableHighlight>
                             <Text style={styles.iconText}>复制链接</Text>
+                        </View>
+                        <View style={styles.itemContainer}>
+                            <TouchableHighlight style={styles.iconContainer}
+                                                onPress={this.moreOperation} underlayColor={underlayColor}>
+                                <Ionicons name="ios-more" size={30} color="#000000"/>
+                            </TouchableHighlight>
+                            <Text style={styles.iconText}>更多</Text>
                         </View>
                     </View>
                 </View>
@@ -65,15 +75,15 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: 'rgba(0, 0, 0, 0.1)',
     },
-    itemsContainer:{
-        width:'100%',
-        flexDirection:'row',
-        alignItems:'flex-start',
-        justifyContent:'flex-start',
+    itemsContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
     },
     itemContainer: {
         width: 60,
-        marginRight:20,
+        marginRight: 20,
     },
     iconContainer: {
         height: 60,

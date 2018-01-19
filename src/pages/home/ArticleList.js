@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, FlatList, Platform, TouchableOpacity,TouchableNativeFeedback, Image, StyleSheet, Dimensions} from 'react-native';
 import cStyles from '../../styles/common';
 
-import Separator from '../../components/Separator';
 import ListEmptyComponent from '../../components/ListEmptyComponent';
 import ListFooterLoadMore from '../../components/ListFooterLoadMore';
 import ListFooterNoMore from '../../components/ListFooterNoMore';
@@ -49,8 +48,7 @@ export default class ArticleList extends React.Component {
     }
 
     _openWebView = (url, title = '') => () => {
-        // this.props.navigation.navigate('WebViewPage', {url, title});
-        this.props.navigation.navigate('CandleStickChartScreen', {url, title});
+        this.props.navigation.navigate('WebViewPage', {url, title});
     }
 
     _renderItem = ({item, index}) => {
@@ -78,7 +76,6 @@ export default class ArticleList extends React.Component {
                     data={flatListData}
                     renderItem={this._renderItem}
                     keyExtractor={(item, index) => index}
-                    ItemSeparatorComponent={Separator}
                     ListEmptyComponent={ isEmpty ? ListEmptyComponent : null}
                     refreshing={refreshing}
                     onRefresh={this.refresh}
@@ -118,7 +115,9 @@ const styles = StyleSheet.create({
     articleContainer: {
         flexDirection: 'row',
         backgroundColor: 'white',
-        padding: 6
+        padding: 6,
+        borderBottomWidth:StyleSheet.hairlineWidth,
+        borderColor:'#d9d9d9'
     },
     articleImg: {
         width: 120,

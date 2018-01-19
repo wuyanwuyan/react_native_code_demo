@@ -94,6 +94,7 @@ export default class WebViewPage extends React.Component {
                     onBackdropPress={this.backHandler}
                     onBackButtonPress={this.backHandler}
                     url={params.url}
+                    title={params.title}
                 />
                 <WebView
                     style={{flex: 1}}

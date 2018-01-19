@@ -1,28 +1,28 @@
-import React, {Component} from 'react';
-import {BackHandler} from 'react-native';
-import {connect} from 'react-redux'
-import {StackNavigator, TabNavigator, DrawerNavigator, addNavigationHelpers, NavigationActions} from 'react-navigation';
-import Splash from './pages/Splash';
-import Origin from './pages/Origin';
-import Origin1, {wrap} from './pages/Origin1';
-import Home from './pages/home';
-import Content from './pages/content';
-import Mine from './pages/mine';
-import WebViewPage from './pages/webView/index';
-import ToastUtil from './utils/ToastUtil';
+import React, {Component} from "react";
+import {BackHandler, Platform} from "react-native";
+import {connect} from "react-redux";
+import {addNavigationHelpers, DrawerNavigator, NavigationActions, StackNavigator, TabNavigator} from "react-navigation";
+import Splash from "./pages/Splash";
+import Home from "./pages/home";
+import Content from "./pages/content";
+import Mine from "./pages/mine";
+import LoginRegister from "./pages/LoginRegister";
+import ResetPassword from "./pages/LoginRegister/ResetPassword";
+import WebViewPage from "./pages/webView/index";
+import ToastUtil from "./utils/ToastUtil";
 
-import DrawerContainer from './Containers/DrawerContainer'
-import CandleStickChartScreen from './components/CandleStickChartScreen';
-import RNExitApp from 'react-native-exit-app';
+import DrawerContainer from "./Containers/DrawerContainer";
+import RNExitApp from "react-native-exit-app";
+import getSlideFromRightTransition from "./utils/react-navigation-slide-from-right-transition";
 
 const Tab = TabNavigator(
     {
         index: {
             screen: Home
         },
-        index2: {
-            screen: Content
-        },
+        // index2: {
+        //     screen: Content
+        // },
         index3: {
             screen: Mine
         }
@@ -37,14 +37,16 @@ const Tab = TabNavigator(
             inactiveTintColor: '#999999',
             showIcon: true,
             style: {
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
+                ...Platform.select({
+                    ios: {height: 46},
+                    android: {}
+                })
             },
-            labelStyle:{
-                marginTop:0,
-                marginBottom:2
-            },
-            indicatorStyle: {
-                opacity: 0
+            labelStyle: Platform.OS === 'ios' ? {paddingBottom: 2} : {
+                marginTop: 0,
+                marginBottom: 2,
+                fontSize: 10,
             },
             tabStyle: {
                 padding: 0
@@ -95,22 +97,35 @@ const App = StackNavigator(
         WebViewPage: {
             screen: WebViewPage
         },
-        CandleStickChartScreen:{
-            screen:CandleStickChartScreen
+        LoginRegister: {
+            screen: LoginRegister
+        },
+        ResetPassword: {
+            screen: ResetPassword
         }
     },
     {
         headerMode: 'screen',
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#3e9ce9'
+                backgroundColor: '#3e9ce9',
             },
             headerTitleStyle: {
                 color: '#fff',
-                fontSize: 20
+                ...Platform.select({
+                    ios: null,
+                    android: {
+                        textAlign: 'center',
+                        alignSelf: 'center',
+                    }
+                }),
             },
             headerTintColor: '#fff'
-        }
+        },
+        cardStyle: {
+            backgroundColor: '#fff',
+        },
+        transitionConfig: Platform.OS === 'ios' ? null : getSlideFromRightTransition
     });
 
 

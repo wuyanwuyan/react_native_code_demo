@@ -42,7 +42,6 @@ class Home extends React.Component {
     }
 
     codePushUpdate = () => {
-        const deploymentKey = "vn1L8Hn4AIVLmbImJOxyUafkKFAaf09d6585-c32c-4359-8b28-0c1d7984bedb";
         // CodePush.checkForUpdate()
         CodePush.sync({
             deploymentKey,
@@ -87,7 +86,7 @@ class Home extends React.Component {
                 <Modal isVisible={modalOpen} animationInTiming={100}>
                     <View style={styles.modalContent}>
                         <Text style={{textAlign: 'center'}}>{showInstalling ? '安装中' : '下载中'}</Text>
-                        {showInstalling ? null : <ProgressBar width="100%" progress={downloadProgress} color="blue"/>}
+                        {showInstalling ? null : <ProgressBar width="100%" progress={downloadProgress} color="#3e9ce9"/>}
                     </View>
                 </Modal>
 
@@ -99,7 +98,7 @@ class Home extends React.Component {
                             tabBarActiveTextColor="#3e9ce9"
                             tabBarInactiveTextColor="#aaaaaa">
                             {
-                                cateList.map(v =>
+                                cateList.map((v,i) =>
                                     <ArticleList
                                         navigation={this.props.navigation}
                                         tabLabel={v.type}

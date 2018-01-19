@@ -1,19 +1,37 @@
-import {Alert, ToastAndroid, Platform} from 'react-native';
+import {Platform, ToastAndroid} from "react-native";
+import Toast from "react-native-root-toast";
 
-const showShort = (content, isAlert) => {
+const showShort = (content) => {
     if (!content) {
         return;
     }
-    if (isAlert || Platform.OS === 'ios') {
-        Alert.alert('提示', content.toString());
+    if (Platform.OS === 'ios') {
+        Toast.show(content.toString(), {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+        });
     } else {
         ToastAndroid.show(content.toString(), ToastAndroid.SHORT);
     }
 };
 
-const showLong = (content, isAlert) => {
-    if (isAlert || Platform.OS === 'ios') {
-        Alert.alert('提示', content.toString());
+const showLong = (content) => {
+    if (!content) {
+        return;
+    }
+    if (Platform.OS === 'ios') {
+        Toast.show(content.toString(), {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+        });
     } else {
         ToastAndroid.show(content.toString(), ToastAndroid.LONG);
     }
